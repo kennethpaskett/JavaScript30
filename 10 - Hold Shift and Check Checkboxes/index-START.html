@@ -31,7 +31,7 @@
     }
 
 
-    input:checked + p {
+    input:checked + label {
       background:#F9F9F9;
       text-decoration: line-through;
     }
@@ -40,7 +40,7 @@
       margin:20px;
     }
 
-    p {
+    label {
       margin:0;
       padding:20px;
       transition:background 0.2s;
@@ -61,44 +61,73 @@
   -->
   <div class="inbox">
     <div class="item">
-      <input type="checkbox">
-      <p>This is an inbox layout.</p>
+      <input type="checkbox" id="checkbox1">
+      <label for="checkbox1">This is an inbox layout.</label>
     </div>
     <div class="item">
-      <input type="checkbox">
-      <p>Check one item</p>
+      <input type="checkbox" id="checkbox2">
+      <label for="checkbox2">Check one item</label>
     </div>
     <div class="item">
-      <input type="checkbox">
-      <p>Hold down your Shift key</p>
+      <input type="checkbox" id="checkbox3">
+      <label for="checkbox3">Hold down your Shift key</label>
     </div>
     <div class="item">
-      <input type="checkbox">
-      <p>Check a lower item</p>
+      <input type="checkbox" id="checkbox4">
+      <label for="checkbox4">Check a lower item</label>
     </div>
     <div class="item">
-      <input type="checkbox">
-      <p>Everything inbetween should also be set to checked</p>
+      <input type="checkbox" id="checkbox5">
+      <label for="checkbox5">Everything inbetween should also be set to checked</label>
     </div>
     <div class="item">
-      <input type="checkbox">
-      <p>Try do it with out any libraries</p>
+      <input type="checkbox" id="checkbox6">
+      <label for="checkbox6">Try do it with out any libraries</label>
     </div>
     <div class="item">
-      <input type="checkbox">
-      <p>Just regular JavaScript</p>
+      <input type="checkbox" id="checkbox7">
+      <label for="checkbox7">Just regular JavaScrilabelt</label>
     </div>
     <div class="item">
-      <input type="checkbox">
-      <p>Good Luck!</p>
+      <input type="checkbox" id="checkbox8">
+      <label for="checkbox8">Good Luck!</label>
     </div>
     <div class="item">
-      <input type="checkbox">
-      <p>Don't forget to tweet your result!</p>
+      <input type="checkbox" id="checkbox9">
+      <label for="checkbox9">Don't forget to tweet your result!</label>
     </div>
   </div>
 
 <script>
+  const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"');
+  const checkboxLabels = document.querySelectorAll('.inbox label');
+  let lastChecked;
+  
+  function handleCheck(e) {
+    let inBetween = false;
+    //Check to see if shift key is pressed and that they are checking a box
+    if(e.shiftKey && this.checked) {
+      //Loop through the checkboxes
+      checkboxes.forEach(checkbox => {
+        // console.log(checkbox);
+        if(checkbox === this || checkbox === lastChecked) {
+          inBetween = !inBetween;
+        }
+        if(inBetween) {
+          // if(!checkbox.checked) {
+          checkbox.checked = true;
+          // } else {
+          //   checkbox.checked = false;
+          // }
+        }
+      })
+    }
+    lastChecked = this;
+  }
+
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+  // checkboxLabels.forEach(label => label.addEventListener('click', handleCheck));
+
 </script>
 </body>
 </html>
